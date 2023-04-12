@@ -1,10 +1,10 @@
 export default function ehUmCPF(campo) { //função sera importada como padrão(default), depois foi criado um function com o parametro campo
+
+    //busca onde existem . e substitui por ""(nada)
     const cpf = campo.value.replace(/\.|-/g, "");//um variavel com o nome cpf que recebe o valor do campo com o metodo replace, que recebe 2 parametros, o primeiro é o que deseja substituir e o seguindo é pelo que desejamos substituir. Aqui ele busca onde temos ponto e hifen e substituindo por nada, ou seja, ele está removendo os caracteres
    
     if(validaNumerosRepetidos(cpf) || validaPrimeiroDigito(cpf) || validaSegundoDigito(cpf)) {
-        console.log("Esse CPF não existe!")
-    } else {
-        console.log("Existe!")
+    campo.setCustomValidity('Esse CPF não é válido!')
     }
 }
 
