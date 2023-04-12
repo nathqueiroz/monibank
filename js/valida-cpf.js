@@ -1,8 +1,11 @@
 export default function ehUmCPF(campo) { //função sera importada como padrão(default), depois foi criado um function com o parametro campo
     const cpf = campo.value.replace(/\.|-/g, "");//um variavel com o nome cpf que recebe o valor do campo com o metodo replace, que recebe 2 parametros, o primeiro é o que deseja substituir e o seguindo é pelo que desejamos substituir. Aqui ele busca onde temos ponto e hifen e substituindo por nada, ou seja, ele está removendo os caracteres
-    validaNumerosRepetidos(cpf);
-    validaPrimeiroDigito(cpf)
-    console.log(validaNumerosRepetidos(cpf));
+   
+    if(validaNumerosRepetidos(cpf) || validaPrimeiroDigito(cpf) || validaSegundoDigito(cpf)) {
+        console.log("Esse CPF não existe!")
+    } else {
+        console.log("Existe!")
+    }
 }
 
 function validaNumerosRepetidos(cpf) {
@@ -39,4 +42,23 @@ function validaPrimeiroDigito(cpf) {
     }
 
     return soma != cpf[9]
+}
+
+function validaSegundoDigito(cpf) {
+    let soma = 0;
+    let multiplicador = 11;
+
+    //laço de repetição
+    for(let tamanho = 0; tamanho < 10; tamanho++) {//esse laço vai repetir por 9 vezes
+        soma += cpf[tamanho] * multiplicador; //a variável soma vai recolher os dígitos do cpf pela posição que condiz com o laço de repetição, de um a nove e vai multiplicar pelo multiplicado que é o dez
+        multiplicador--; //
+    }
+
+    soma = (soma * 10) % 11; 
+
+    if (soma == 10 || soma == 1) {
+        soma = 0;
+    }
+
+    return soma != cpf[10]
 }
